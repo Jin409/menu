@@ -16,12 +16,13 @@ public class CoachService {
         this.coachRepository = coachRepository;
     }
 
-    public List<Coach> validateCoaches(List<String> coachNames) {
-        List<Coach> coaches = coachNames.stream().map(Coach::new).collect(Collectors.toList());
-        if (coaches.size() < MIN_RANGE_VALID_SIZE_OF_COACHES || coaches.size() > MAX_RANGE_VALID_SIZE_OF_COACHES) {
+    public void validateCoaches(List<String> coachNames) {
+        coachNames.forEach(Coach::validate);
+
+        if (coachNames.size() < MIN_RANGE_VALID_SIZE_OF_COACHES
+                || coachNames.size() > MAX_RANGE_VALID_SIZE_OF_COACHES) {
             throw new IllegalArgumentException("코치들은 최소 2명에서 최대 5명 사이여야 합니다.");
         }
-        return coaches;
     }
 
     public void save(Coach coach) {

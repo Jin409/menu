@@ -14,4 +14,15 @@ public class InputHandler {
         InputValidator.validateCoachNames(rawInput);
         return Arrays.asList(rawInput.split(DELIMITER));
     }
+
+    public static List<String> getAllergicFoods() {
+        String rawInput = InputView.readAllergicFoods();
+
+        if (rawInput.isBlank()) {
+            return List.of();
+        }
+
+        InputValidator.validateAllergicFoods(rawInput);
+        return Arrays.asList(rawInput.split(DELIMITER));
+    }
 }

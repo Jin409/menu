@@ -1,29 +1,55 @@
 package menu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import menu.handler.ErrorHandler;
 import menu.handler.InputHandler;
 import menu.model.Coach;
+import menu.model.Food;
 import menu.service.CoachService;
+import menu.service.FoodService;
+import menu.view.InputView;
 import menu.view.OutputView;
 
 public class MenuController {
     private final CoachService coachService;
+    private final FoodService foodService;
 
-    public MenuController(CoachService coachService) {
+    public MenuController(CoachService coachService, FoodService foodService) {
         this.coachService = coachService;
+        this.foodService = foodService;
     }
 
     public void run() {
         OutputView.displayStartMessage();
-        List<Coach> coaches = retryOnInvalidInput(this::getCoaches);
-        coaches.forEach(coachService::save);
+        readyToPick();
     }
 
-    private List<Coach> getCoaches() {
+    private void readyToPick() {
+        List<String> coachNames = retryOnInvalidInput(this::getValidCoachNames);
+
+        for (String name : coachNames) {
+            InputView.displayMessageToAllergicFoods(name);
+            List<Food> allergicFoods = retryOnInvalidInput(this::getAllergicFoods);
+        }
+    }
+
+    private List<Food> getAllergicFoods() {
+        List<String> foodNames = InputHandler.getAllergicFoods();
+        if (foodNames.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return foodService.getAllergicFoods(foodNames);
+    }
+
+
+    private List<String> getValidCoachNames() {
         List<String> coachNames = InputHandler.getCoachNames();
-        return coachService.validateCoaches(coachNames);
+        coachService.validateCoaches(coachNames);
+        return coachNames;
     }
 
     private <T> T retryOnInvalidInput(Supplier<T> inputSupplier) {
