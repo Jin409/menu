@@ -13,6 +13,10 @@ public enum Category {
         this.order = order;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static Category findByOrder(int order) {
         return Arrays.stream(Category.values()).filter(c -> c.order == order).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 카테고리입니다."));

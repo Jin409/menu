@@ -1,12 +1,12 @@
 package menu.config;
 
 import menu.controller.MenuController;
-import menu.model.FoodHistory;
 import menu.model.repository.CategoryHistoryRepository;
 import menu.model.repository.CoachRepository;
 import menu.model.repository.FoodHistoryRepository;
 import menu.service.CoachService;
 import menu.service.FoodService;
+import menu.service.HistoryService;
 
 public class AppConfig {
 
@@ -30,7 +30,11 @@ public class AppConfig {
         return new FoodService(categoryHistoryRepository(), foodHistoryRepository(), coachRepository());
     }
 
+    private HistoryService historyService() {
+        return new HistoryService(foodHistoryRepository(), categoryHistoryRepository());
+    }
+
     public MenuController menuController() {
-        return new MenuController(coachService(), foodService());
+        return new MenuController(coachService(), foodService(), historyService());
     }
 }

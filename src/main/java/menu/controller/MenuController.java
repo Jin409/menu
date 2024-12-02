@@ -10,25 +10,30 @@ import menu.model.Coach;
 import menu.model.Food;
 import menu.service.CoachService;
 import menu.service.FoodService;
+import menu.service.HistoryService;
 import menu.view.InputView;
 import menu.view.OutputView;
 
 public class MenuController {
     private final CoachService coachService;
     private final FoodService foodService;
+    private final HistoryService historyService;
 
-    public MenuController(CoachService coachService, FoodService foodService) {
+    public MenuController(CoachService coachService, FoodService foodService, HistoryService historyService) {
         this.coachService = coachService;
         this.foodService = foodService;
+        this.historyService = historyService;
     }
 
     public void run() {
         OutputView.displayStartMessage();
         readyToPick();
+        getResult();
     }
 
     private void getResult() {
         foodService.pickFoods();
+        OutputView.displayResult(historyService.getResults());
     }
 
     private void readyToPick() {

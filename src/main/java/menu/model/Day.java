@@ -1,7 +1,7 @@
 package menu.model;
 
 public enum Day {
-    MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5);
+    월요일(1), 화요일(2), 수요일(3), 목요일(4), 금요일(5);
 
     private final int order;
 

@@ -10,6 +10,7 @@ public enum Food {
     오니기리(Category.JAPANESE, "오니기리"),
     하이라이스(Category.JAPANESE, "하이라이스"),
     라멘(Category.JAPANESE, "라멘"),
+    가츠동(Category.JAPANESE, "가츠동"),
     오코노미야끼(Category.JAPANESE, "오코노미야끼"),
 
     김밥(Category.KOREAN, "김밥"),
@@ -62,10 +63,14 @@ public enum Food {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static Food findByName(String comparedName) {
         return Arrays.stream(Food.values())
-                .filter(f -> f.name.equals(comparedName))
-                .findFirst()
+                .filter(f -> f.getName().equals(comparedName))
+                .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 음식입니다."));
     }
 }

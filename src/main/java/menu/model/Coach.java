@@ -24,4 +24,8 @@ public class Coach {
     public boolean isAllergicTo(Food food) {
         return allergicFoods.contains(food);
     }
+
+    public String getName() {
+        return name;
+    }
 }

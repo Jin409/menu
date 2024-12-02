@@ -12,4 +12,13 @@ public class CategoryHistory {
     public boolean hasCategory(Category comparedCategory) {
         return this.category == comparedCategory;
     }
+
+    public boolean recordedAt(Day day) {
+        return this.day == day;
+    }
+
+    public String getCategoryName() {
+        return category.getName();
+    }
 }
+

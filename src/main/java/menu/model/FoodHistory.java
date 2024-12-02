@@ -18,4 +18,16 @@ public class FoodHistory {
     public boolean belongsTo(Coach comparedCoach) {
         return this.coach.equals(comparedCoach);
     }
+
+    public boolean recordedAt(Day day) {
+        return this.day == day;
+    }
+
+    public String getCoachName() {
+        return coach.getName();
+    }
+
+    public String getFoodName() {
+        return food.getName();
+    }
 }
