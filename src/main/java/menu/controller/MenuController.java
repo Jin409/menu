@@ -18,6 +18,7 @@ public class MenuController {
     public void run() {
         OutputView.displayStartMessage();
         List<Coach> coaches = retryOnInvalidInput(this::getCoaches);
+        coaches.forEach(coachService::save);
     }
 
     private List<Coach> getCoaches() {
