@@ -28,10 +28,7 @@ public class MenuController {
     }
 
     private void getResult() {
-        for (int i = 0; i < 5; i++) {
-            Category category = foodService.pickCategory();
-            foodService.pickFoodForAllCoaches(category);
-        }
+        foodService.pickFoods();
     }
 
     private void readyToPick() {

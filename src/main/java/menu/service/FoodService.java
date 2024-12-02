@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import menu.model.Category;
 import menu.model.CategoryHistory;
+import menu.model.Day;
 import menu.model.repository.CategoryHistoryRepository;
 import menu.model.Coach;
 import menu.model.repository.CoachRepository;
@@ -35,13 +36,20 @@ public class FoodService {
         return foodNames.stream().map(Food::findByName).collect(Collectors.toList());
     }
 
-    public Category pickCategory() {
+    public void pickFoods() {
+        for (Day day : Day.values()) {
+            Category category = pickCategory(day);
+            pickFoodForAllCoaches(category);
+        }
+    }
+
+    private Category pickCategory(Day day) {
         Category category = CategoryPicker.pickCategory(categoryHistoryRepository.getAll());
-        categoryHistoryRepository.save(new CategoryHistory(category));
+        categoryHistoryRepository.save(new CategoryHistory(day, category));
         return category;
     }
 
-    public void pickFoodForAllCoaches(Category category) {
+    private void pickFoodForAllCoaches(Category category) {
         List<Coach> coaches = coachRepository.getAllCoaches();
         for (Coach coach : coaches) {
             List<FoodHistory> foodHistories = foodHistoryRepository.getFoodHistoriesOf(coach);
