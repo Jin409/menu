@@ -22,7 +22,7 @@ public class AppConfig {
         return new FoodHistoryRepository();
     }
 
-    private CoachService coachService() {
+    public CoachService coachService() {
         return new CoachService(coachRepository());
     }
 
