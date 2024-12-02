@@ -39,7 +39,7 @@ public class FoodService {
     public void pickFoods() {
         for (Day day : Day.values()) {
             Category category = pickCategory(day);
-            pickFoodForAllCoaches(category);
+            pickFoodForAllCoaches(category, day);
         }
     }
 
@@ -49,12 +49,12 @@ public class FoodService {
         return category;
     }
 
-    private void pickFoodForAllCoaches(Category category) {
+    private void pickFoodForAllCoaches(Category category, Day day) {
         List<Coach> coaches = coachRepository.getAllCoaches();
         for (Coach coach : coaches) {
             List<FoodHistory> foodHistories = foodHistoryRepository.getFoodHistoriesOf(coach);
             Food food = FoodPicker.pickFood(foodHistories, coach, category);
-            foodHistoryRepository.save(new FoodHistory(coach, food));
+            foodHistoryRepository.save(new FoodHistory(coach, food, day));
         }
     }
 }
