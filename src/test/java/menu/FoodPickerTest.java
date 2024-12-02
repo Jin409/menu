@@ -3,7 +3,6 @@ package menu;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 import menu.model.Category;
 import menu.model.Coach;
@@ -11,7 +10,6 @@ import menu.model.Day;
 import menu.model.Food;
 import menu.model.FoodHistory;
 import menu.utils.FoodPicker;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class FoodPickerTest {

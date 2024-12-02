@@ -75,7 +75,7 @@ public enum Food {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 음식입니다."));
     }
 
-    public static List<String> getMenuNamesByCategory(Category category) {
+    public static List<String> getFoodNamesByCategory(Category category) {
         List<Food> foods = Arrays.stream(Food.values())
                 .filter(f -> f.category.equals(category))
                 .collect(Collectors.toList());
