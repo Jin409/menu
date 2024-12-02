@@ -13,4 +13,8 @@ public class CoachRepository {
     public void save(Coach coach) {
         coaches.add(coach);
     }
+
+    public List<Coach> getAllCoaches() {
+        return coaches;
+    }
 }

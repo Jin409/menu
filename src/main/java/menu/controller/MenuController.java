@@ -2,11 +2,10 @@ package menu.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import menu.handler.ErrorHandler;
 import menu.handler.InputHandler;
+import menu.model.Category;
 import menu.model.Coach;
 import menu.model.Food;
 import menu.service.CoachService;
@@ -28,12 +27,21 @@ public class MenuController {
         readyToPick();
     }
 
+    private void getResult() {
+        for (int i = 0; i < 5; i++) {
+            Category category = foodService.pickCategory();
+            foodService.pickFoodForAllCoaches(category);
+        }
+    }
+
     private void readyToPick() {
         List<String> coachNames = retryOnInvalidInput(this::getValidCoachNames);
 
         for (String name : coachNames) {
             InputView.displayMessageToAllergicFoods(name);
             List<Food> allergicFoods = retryOnInvalidInput(this::getAllergicFoods);
+            Coach coach = new Coach(name, allergicFoods);
+            coachService.save(coach);
         }
     }
 

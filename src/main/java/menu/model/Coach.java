@@ -20,4 +20,8 @@ public class Coach {
             throw new IllegalArgumentException("코치의 이름은 2글자에서 4글자 사이여야 합니다.");
         }
     }
+
+    public boolean isAllergicTo(Food food) {
+        return allergicFoods.contains(food);
+    }
 }
