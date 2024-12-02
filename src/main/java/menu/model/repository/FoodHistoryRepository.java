@@ -1,8 +1,10 @@
-package menu.model;
+package menu.model.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import menu.model.Coach;
+import menu.model.FoodHistory;
 
 public class FoodHistoryRepository {
     private static List<FoodHistory> foodHistories;

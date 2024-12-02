@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import menu.model.Category;
 import menu.model.CategoryHistory;
-import menu.model.CategoryHistoryRepository;
+import menu.model.repository.CategoryHistoryRepository;
 import menu.model.Coach;
-import menu.model.CoachRepository;
+import menu.model.repository.CoachRepository;
 import menu.model.Food;
 import menu.model.FoodHistory;
-import menu.model.FoodHistoryRepository;
+import menu.model.repository.FoodHistoryRepository;
 import menu.utils.CategoryPicker;
 import menu.utils.FoodPicker;
 

@@ -1,9 +1,8 @@
 package menu.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import menu.model.Coach;
-import menu.model.CoachRepository;
+import menu.model.repository.CoachRepository;
 
 public class CoachService {
 

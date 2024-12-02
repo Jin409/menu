@@ -1,8 +1,8 @@
-package menu.model;
+package menu.model.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import menu.utils.CategoryPicker;
+import menu.model.CategoryHistory;
 
 public class CategoryHistoryRepository {
     private static List<CategoryHistory> categoryHistoryList;
