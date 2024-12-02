@@ -42,6 +42,26 @@ public class OutputView {
     }
 
     private static List<String> formatFoodHistories(List<ResultDto> dtos) {
+        List<String> coachNames = new ArrayList<>();
+        List<FoodHistoryDto> foodHistoryDtos = dtos.get(0).getFoodHistoryDtos();
+        for (FoodHistoryDto foodHistoryDto : foodHistoryDtos) {
+            coachNames.add(foodHistoryDto.getCoachName());
+        }
+
+        Map<String, List<String>> groupedByCoachName = getFoodNamesGroupedByCoachName(dtos);
+        List<String> results = new ArrayList<>();
+        for (String coachName : coachNames) {
+            StringBuilder result = new StringBuilder("[ " + coachName);
+            for (String foodName : groupedByCoachName.get(coachName)) {
+                result.append(" | ").append(foodName);
+            }
+            results.add(result + " ]");
+        }
+
+        return results;
+    }
+
+    private static Map<String, List<String>> getFoodNamesGroupedByCoachName(List<ResultDto> dtos) {
         Map<String, List<String>> groupedByCoachName = new HashMap<>();
 
         for (ResultDto dto : dtos) {
@@ -54,25 +74,9 @@ public class OutputView {
                     continue;
                 }
                 groupedByCoachName.put(coachName, new ArrayList<>(List.of(foodHistoryDto.getFoodName())));
-
             }
         }
 
-        List<String> coachNames = new ArrayList<>();
-        List<FoodHistoryDto> foodHistoryDtos = dtos.get(0).getFoodHistoryDtos();
-        for (FoodHistoryDto foodHistoryDto : foodHistoryDtos) {
-            coachNames.add(foodHistoryDto.getCoachName());
-        }
-
-        List<String> results = new ArrayList<>();
-        for (String coachName : coachNames) {
-            StringBuilder result = new StringBuilder("[ " + coachName);
-            for (String foodName : groupedByCoachName.get(coachName)) {
-                result.append(" | ").append(foodName);
-            }
-            results.add(result + " ]");
-        }
-
-        return results;
+        return groupedByCoachName;
     }
 }
