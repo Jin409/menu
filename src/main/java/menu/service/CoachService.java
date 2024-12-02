@@ -23,4 +23,8 @@ public class CoachService {
         }
         return coaches;
     }
+
+    public void save(Coach coach) {
+        coachRepository.save(coach);
+    }
 }
