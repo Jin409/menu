@@ -1,16 +1,18 @@
 package menu.model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Food {
     규동(Category.JAPANESE, "규동"),
     우동(Category.JAPANESE, "우동"),
     미소시루(Category.JAPANESE, "미소시루"),
     스시(Category.JAPANESE, "스시"),
+    가츠동(Category.JAPANESE, "가츠동"),
     오니기리(Category.JAPANESE, "오니기리"),
     하이라이스(Category.JAPANESE, "하이라이스"),
     라멘(Category.JAPANESE, "라멘"),
-    가츠동(Category.JAPANESE, "가츠동"),
     오코노미야끼(Category.JAPANESE, "오코노미야끼"),
 
     김밥(Category.KOREAN, "김밥"),
@@ -52,7 +54,6 @@ public enum Food {
     스파게티(Category.WESTERN, "스파게티"),
     피자(Category.WESTERN, "피자"),
     파니니(Category.WESTERN, "파니니"),
-
     ;
 
     private final Category category;
@@ -72,5 +73,14 @@ public enum Food {
                 .filter(f -> f.getName().equals(comparedName))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 음식입니다."));
+    }
+
+    public static List<String> getMenuNamesByCategory(Category category) {
+        List<Food> foods = Arrays.stream(Food.values())
+                .filter(f -> f.category.equals(category))
+                .collect(Collectors.toList());
+        return foods.stream()
+                .map(Food::getName)
+                .collect(Collectors.toList());
     }
 }
