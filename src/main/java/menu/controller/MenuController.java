@@ -1,26 +1,28 @@
-package menu;
+package menu.controller;
 
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import menu.handler.ErrorHandler;
 import menu.handler.InputHandler;
 import menu.model.Coach;
-import menu.model.Coaches;
+import menu.service.CoachService;
 import menu.view.OutputView;
 
 public class MenuController {
-    public void run() {
-        OutputView.displayStartMessage();
-        Coaches coaches = retryOnInvalidInput(this::getCoaches);
+    private final CoachService coachService;
+
+    public MenuController(CoachService coachService) {
+        this.coachService = coachService;
     }
 
-    private Coaches getCoaches() {
+    public void run() {
+        OutputView.displayStartMessage();
+        List<Coach> coaches = retryOnInvalidInput(this::getCoaches);
+    }
+
+    private List<Coach> getCoaches() {
         List<String> coachNames = InputHandler.getCoachNames();
-        List<Coach> coaches = coachNames.stream()
-                .map(Coach::new)
-                .collect(Collectors.toList());
-        return new Coaches(coaches);
+        return coachService.validateCoaches(coachNames);
     }
 
     private <T> T retryOnInvalidInput(Supplier<T> inputSupplier) {
